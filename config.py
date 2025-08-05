@@ -32,7 +32,7 @@ DATASET_CONFIG = {
 TRAIN_CONFIG = {
     'project_path': 'runs/train',
     'experiment_name': 'car_logo_exp',
-    'model_name': 'yolo11x.pt',
+    'model_name': 'yolo11l.pt',
     'epochs': 100,
     'image_size': 640,
     'batch_size': 16
