@@ -1,5 +1,11 @@
 /data
+
 /dataset
 /logs
+/runs
+/model
+yolo11x.pt
 .DS_Store
 __pycache__
+yolo11x.pt.56d4467c9ae74a7581987532bbc2965b.partial
+1

@@ -65,7 +65,7 @@ class YOLOTrainer:
                 'data': str(data_yaml),
                 'epochs': epochs,
                 'imgsz': imgsz,
-                'project': TRAIN_CONFIG['project_name'],
+                'project': TRAIN_CONFIG['project_path'],
                 'name': TRAIN_CONFIG['experiment_name'],
                 'save': True,
                 'plots': True,
@@ -97,7 +97,7 @@ class YOLOPredictor:
     
     def _find_latest_model(self) -> Path:
         """查找最新训练的模型"""
-        train_dir = Path(TRAIN_CONFIG['project_name'])
+        train_dir = Path(TRAIN_CONFIG['project_path'])
         model_pattern = f"*/weights/best.pt"
         
         model_files = list(train_dir.glob(model_pattern))
@@ -152,14 +152,14 @@ class YOLOPredictor:
             results = model.predict(
                 source=str(source_dir),
                 save=True,
-                project=PREDICT_CONFIG['project_name'],
+                project=PREDICT_CONFIG['project_path'],
                 name=PREDICT_CONFIG['experiment_name'],
                 conf=PREDICT_CONFIG['confidence_threshold'],
                 iou=PREDICT_CONFIG['iou_threshold']
             )
             
             logger.info("预测完成！")
-            logger.info(f"结果保存到: {PREDICT_CONFIG['project_name']}/{PREDICT_CONFIG['experiment_name']}")
+            logger.info(f"结果保存到: {PREDICT_CONFIG['project_path']}/{PREDICT_CONFIG['experiment_name']}")
             
             return True
             

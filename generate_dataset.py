@@ -153,11 +153,11 @@ class DatasetGenerator:
                 # 叠加图像
                 bg = overlay_image_with_alpha(bg, augmented_logo, x, y)
 
-                # 生成YOLO标签
+                # 生成YOLO标签 (carlogo类别ID为80)
                 x_center, y_center, width, height = calculate_yolo_bbox(
                     x, y, logo_w, logo_h, bg_w, bg_h
                 )
-                labels.append(f'0 {x_center:.6f} {y_center:.6f} {width:.6f} {height:.6f}')
+                labels.append(f'80 {x_center:.6f} {y_center:.6f} {width:.6f} {height:.6f}')
 
             if labels:
                 cv2.imwrite(str(output_image_path), bg)
