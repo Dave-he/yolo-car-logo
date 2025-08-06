@@ -170,3 +170,9 @@ python main.py predict --model runs/train/exp/weights/best.pt --conf 0.5 --iou 0
 ## 许可证
 
 本项目仅供学习和研究使用。
+
+## 模型地址
+https://modelscope.cn/models/heyongxian/yolo11-car-logo
+
+cd runs/train
+modelscope upload heyongxian/yolo11-car-logo . --token=ms-5e0f44ea-33a0-4a8d-b353-9f866260e197

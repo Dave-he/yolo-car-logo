@@ -199,19 +199,22 @@ class DatasetGenerator:
         logger.info(f"成功生成 {generated_count} 张 {split_name} 图片")
         return generated_count
     
-    def generate_dataset(self) -> None:
-        """生成完整的数据集"""
+    def generate_dataset(self, num_train: int = 1000, num_val: int = 200) -> None:
+        """生成完整的数据集
+        
+        Args:
+            num_train: 训练集图片数量
+            num_val: 验证集图片数量
+        """
         logger.info("开始生成数据集...")
+        logger.info(f"训练集数量: {num_train}")
+        logger.info(f"验证集数量: {num_val}")
         
         # 生成训练集
-        train_count = self.create_dataset_split(
-            DATASET_CONFIG['num_train'], 'train'
-        )
+        train_count = self.create_dataset_split(num_train, 'train')
         
         # 生成验证集
-        val_count = self.create_dataset_split(
-            DATASET_CONFIG['num_val'], 'val'
-        )
+        val_count = self.create_dataset_split(num_val, 'val')
         
         # 创建data.yaml配置文件
         self._create_data_yaml()
@@ -239,9 +242,37 @@ class DatasetGenerator:
 
 def main():
     """主函数"""
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description="生成YOLO格式的车标检测数据集",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例用法:
+  生成默认数据集: python generate_dataset.py
+  自定义数量: python generate_dataset.py --num_train 2000 --num_val 400
+        """
+    )
+    
+    parser.add_argument(
+        "--num_train",
+        type=int,
+        default=1000,
+        help="训练集图片数量 (默认: 1000)"
+    )
+    
+    parser.add_argument(
+        "--num_val",
+        type=int,
+        default=200,
+        help="验证集图片数量 (默认: 200)"
+    )
+    
+    args = parser.parse_args()
+    
     try:
         generator = DatasetGenerator()
-        generator.generate_dataset()
+        generator.generate_dataset(num_train=args.num_train, num_val=args.num_val)
     except Exception as e:
         logger.error(f"数据集生成失败: {e}")
         raise

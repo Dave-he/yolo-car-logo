@@ -16,8 +16,6 @@ DATA_CONFIG = {
 
 # 数据集生成配置
 DATASET_CONFIG = {
-    'num_train': 1000,
-    'num_val': 200,
     'supported_image_formats': ('.jpg', '.png', '.jpeg', '.bmp', '.tiff'),
     'supported_logo_formats': ('.png', '.svg'),
     'logo_scale_range': (0.05, 0.15),  # 车标缩放范围（相对于背景宽度的百分比）
@@ -25,7 +23,7 @@ DATASET_CONFIG = {
     'max_logos_per_image': 4,  # 每张图片最多车标数量
     'placement_attempts': 10,  # 放置车标时的最大尝试次数
     'svg_output_width': 256,  # SVG转PNG时的输出宽度
-    'data_yaml_path' : 'dataset/data.yaml'
+    'data_yaml_path': 'dataset/data.yaml'
 }
 
 # 训练配置
